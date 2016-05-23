@@ -1,1 +1,1 @@
-# jerakrs.github.io
+# jerakrs.com
