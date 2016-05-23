@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!--
+		* Author:         Jerakrs
+		-->
+
+		<meta charset="utf-8" />
+
+		<title> JeraKrs.com</title>
+
+		<meta name="author" content="JeraKrs" />
+		<meta name="description" content="JeraKrs's Blog" />
+		<meta name="renderer" content="webkit">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0"> <!-- 自适应分辨率 -->
+
+		<link rel="stylesheet" href="/css/default.css" type="text/css" />
+		<link rel="shortcut icon" href="/Images/favicon.jpg" type="image/x-icon" />  <!-- 设置图标 -->
+
+		<html xmlns:wb="http://open.weibo.com/wb"> <!-- 微博分享 -->
+
+		<script src="/js/jquery-1.7.1.min.js" type="text/javascript"></script>
+
+		</head>
+
+		<body>
+
+			<div class="home-menu">
+				<div class="home-menu-info">
+					<a class="home-info" href="/">JeraKrs</a>
+					<a class="home-follow" href="#" title="Contact Me">+</a>
+				</div>
+
+				<div class="home-contact">
+					<a href="http://weibo.com/JeraKrs/" target="_blank"><img src="http://www.weibo.com/favicon.ico" alt="" width="22"/></a>
+					<a href="https://www.douban.com/people/BearChild-/" target="_blank"><img src="http://www.douban.com/favicon.ico" alt="" width="22"/></a>
+					<a href="https://github.com/ksBSB" target="_blank"><img src="https://github.com/fluidicon.png" alt="" width="22"/></a>
+				</div>
+			</div>
+
+			<div class="index-content study">
+    <div class="section">
+        <ul class="artical-cate">
+            <li class="on"><a href="/"><span>开发</span></a></li>
+            <li style="text-align:center"><a href="/Pages/life"><span>生活</span></a></li>
+            <li style="text-align:right"><a href="/Pages/algorithm"><span>算法</span></a></li>
+        </ul>
+
+        <div class="cate-bar"><span id="cateBar"></span></div>
+        
+        <ul class="artical-list">
+            
+            <li>
+            <h2><a href="/study/2016/05/20/Github-Pages.html">使用Github Pages搭建个人博客
+            <dd style="font-size:10px; float:right">20 May 2016</dd>
+            </a></h2>
+            <div class="title-desc">Github作为一个代码社区，管理着许多项目代码，为了使项目能够清晰直观地呈现给别人，介绍文档是不可或缺的，甚至有时需要一个完整的文档站。而Github Pages就是提供给用户用于介绍托管在Github上的项目，使用它可以很方便的建立自己的独立博客，并且免费。</div>
+            </li>
+            
+            <li>
+            <h2><a href="/study/2012/02/22/github-pages.html">使用Github Pages建独立博客
+            <dd style="font-size:10px; float:right">22 Feb 2012</dd>
+            </a></h2>
+            <div class="title-desc">Github本身就是不错的代码社区，他也提供了一些其他的服务，比如Github Pages，使用它可以很方便的建立自己的独立博客，并且免费。</div>
+            </li>
+            
+        </ul>
+    </div>
+
+    <div class="aside">
+        <div id="footer">
+            © copyright 2016 by 
+            <a href="/Pages/about" style="color:#d0604d">JeraKrs</a>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<script type="text/javascript">
+    $(function(){
+        function animateBar($item,noAni){
+            var spanLeft = $item.find('span').offset().left;
+            var conLeft = $item.parent().offset().left;
+            var left = spanLeft - conLeft;
+            var width = $item.find('span').width() + 8;
+
+            if(noAni){
+                $('#cateBar').css({left:left,width:width})
+            }else{
+                $('#cateBar').stop().animate({left:left,width:width},300)
+            }
+        }
+
+        var waitForFinalEvent = (function () {
+            var timers = {};
+            return function (callback, ms, uniqueId) {
+                if (!uniqueId) {
+                    uniqueId = "Don't call this twice without a uniqueId";
+                }
+                if (timers[uniqueId]) {
+                    clearTimeout (timers[uniqueId]);
+                }
+                timers[uniqueId] = setTimeout(callback, ms);
+            };
+        })();
+
+        $('.artical-cate li').mouseenter(function(){
+            animateBar($(this));
+        }).mouseleave(function(){
+            animateBar($('.artical-cate .on'));
+        });
+
+        $(window).resize(function(e){
+            waitForFinalEvent(function(){
+                animateBar($('.artical-cate .on'));
+            })
+        })
+        animateBar($('.artical-cate .on'),true);
+    });
+</script>
+
+
+			<script type="text/javascript">
+				$(function(){
+					$('.home-follow').click(function(e){
+						e.preventDefault();
+						$('.home-contact').fadeToggle("slow")
+					});
+				})
+			</script>
+	</body>
+</html>
