@@ -61,7 +61,7 @@ layout: default
 					</button>
 				</a>
 
-				<a href="https://github.com/ksBSB" target="_blank" rel="external">
+				<a href="https://github.com/JeraKrs" target="_blank" rel="external">
 					<button type="button" class="info-link link-white">
 						<i class="fa fa-github"></i>
 						<strong>github</strong>
