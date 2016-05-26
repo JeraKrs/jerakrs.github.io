@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!--
+		* Author:         Jerakrs
+		-->
+
+		<meta charset="utf-8" />
+
+		<title> 使用Github Pages搭建个人博客 | JeraKrs.com</title>
+
+		<meta name="author" content="JeraKrs" />
+		<meta name="description" content="JeraKrs's Blog" />
+		<meta name="renderer" content="webkit">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0"> <!-- 自适应分辨率 -->
+
+		<link rel="stylesheet" href="/css/default.css" type="text/css" />
+		<link rel="shortcut icon" href="/Images/favicon.jpg" type="image/x-icon" />  <!-- 设置图标 -->
+
+		<html xmlns:wb="http://open.weibo.com/wb"> <!-- 微博分享 -->
+
+		<script src="/js/jquery-1.7.1.min.js" type="text/javascript"></script>
+
+		</head>
+
+		<body>
+
+			<div class="home-menu">
+				<div class="home-menu-info">
+					<a class="home-info" href="/">JeraKrs</a>
+					<a class="home-follow" href="#" title="Contact Me">+</a>
+				</div>
+
+				<div class="home-contact">
+					<a href="http://weibo.com/JeraKrs/" target="_blank"><img src="http://www.weibo.com/favicon.ico" alt="" width="22"/></a>
+					<a href="https://www.douban.com/people/BearChild-/" target="_blank"><img src="http://www.douban.com/favicon.ico" alt="" width="22"/></a>
+					<a href="https://github.com/JeraKrs" target="_blank"><img src="https://github.com/fluidicon.png" alt="" width="22"/></a>
+				</div>
+			</div>
+
+			<link rel="stylesheet" href="/js/prettify/prettify.css" />
+
+<style type="text/css">
+	body { background:#e8e8e8; }
+	@media screen and (max-width: 800px){
+		body { background:#ffffff; }
+	}
+</style>
+
+<div id="content">
+
+	<div class="sidemenu">
+		<iframe width="100%" height="75" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=75&fansRow=2&ptype=1&speed=0&skin=1&isTitle=0&noborder=0&isWeibo=0&isFans=0&uid=1948705855&verifier=46dde484&dpc=1"></iframe>
+	</div>
+
+	<div class="blog">
+		<h1 class="blog-title"><a href="/study/2016/05/26/Github-Pages.html" title="使用Github Pages搭建个人博客">使用Github Pages搭建个人博客</a></h1>
+		<p class="blog-date">2016-05-26</p>
+
+		<p>开始写博客已经有三年了，一开始写博客是因为学习算法，在各种不同的OJ上刷题，然后写题解。后来觉得社区提供的版面样式太单一了，所以萌生了自己搭建博客站点的想法，而且有自己独立的域名也是挺酷的一件事。最近几天跟着网上的教程自己动手搭了博客，所以写篇文章分享下经验。</p>
+
+<h2>Github Pages</h2>
+
+<p>如何使用、安装Git我就不多说了，但是使用<a href="http://pages.github.com/" title="Github Pages">Github Pages</a>，首先要注意的是Github Pages采用的是HTTP协议，不是HTTPS，区别在于HTTPS协议是由SSL+HTTP协议构建的可进行加密传输、身份认证的网络协议，所以不要做一些敏感的操作处理，比如发送用户密码；并且Github Pages限制每月带宽为100GB和10000次请求，每个站点有1G的空间，对于个人博客而言绰绰有余了，当然这个限额并不是说超过了就会怎样，只是Github会发邮件建议你将网站搬到其它平台上。</p>
+
+<p>你也可以选择使用<a href="https://cn.wordpress.org/" title="WordPress">WordPress</a>搭建个人博客，一种使用PHP语言开发的博客平台，用户可以在支持PHP和MySQL数据库的服务器上架设属于自己的网站。</p>
+
+<p>而我选择Github Pages是因为以下几个优点：</p>
+
+<ul>
+<li>轻量级的博客系统，不需要麻烦的配置</li>
+<li>可以使用自己喜欢的编辑器或标记语言，比如<a href="https://maxiang.io/" title="Markdown">Markdown</a></li>
+<li>无需自己搭建服务器，免费流量和空间，但每月有限额</li>
+<li>可以绑定自己的域名</li>
+</ul>
+
+
+<p>当然，Github Pages也存在局限性：</p>
+
+<ul>
+<li>需要一定技术支持，例如使用Git和网页开发经验</li>
+<li>静态网页，动态功能必须使用外部服务，例如评论</li>
+<li>无法使用数据库，不适于与大型网站</li>
+</ul>
+
+
+<h2>Jekyll</h2>
+
+<p>GitHub Pages为了提供对HTML内容的支持，选择了Jekyll作为模板系统，Jekyll是一个静态站点生成器，它会根据网页源码生成静态文件。它提供了模板、变量、插件等功能，所以可以用来编写整个网站。你可以查看Jekyll的<a href="http://jekyllrb.com/docs/configuration/">官方文档</a>。</p>
+
+<h3>搭建本地jekyll环境</h3>
+
+<p>安装Jekyll是一个很简单的过程。但是有时候因为你的电脑的一些配置，前提环境的问题，又会变得很复杂。所需要的前提环境有：</p>
+
+<ul>
+<li>需要有Ruby</li>
+<li>在Ruby的基础上，安装好RubyGems</li>
+<li>Linux, Unix, or Mac OS X</li>
+<li>Python</li>
+</ul>
+
+
+<h4>安装Ruby</h4>
+
+<p>在本地安装Ruby，Linux系统下操作：</p>
+
+<pre><code>$ sudo apt-get install ruby2.3.1
+</code></pre>
+
+<p>Mac系统下使用homebrew进行安装：</p>
+
+<pre><code>$ brew install ruby
+</code></pre>
+
+<p>安装完之后，在终端检查是否安装好。运行ruby -v，查看ruby版本。</p>
+
+<h4>安装 RubyGems</h4>
+
+<p>RubyGems 是一个 Ruby 包的管理工具，就像 Homebrew，npm 等，可以下载 <a href="https://rubygems.org/pages/download">安装包</a>到本地。安装到本地之后，在终端检查更新：</p>
+
+<pre><code>##可能需要根权限
+$ gem update --system
+
+##检查安装情况，输出当前版本
+$ gem -v
+</code></pre>
+
+<h4>安装 Jekyll</h4>
+
+<p>最好的安装方法应该是通过 RubyGems 来安装，在终端输入：</p>
+
+<pre><code>##可能需要根权限
+$ gem install jekyll
+
+##同样在安装完成后输出版本号检查结果
+$ jekyll -v
+</code></pre>
+
+<p>至此，你已经成功在本地电脑上安装好了 Jekyll。如果你使用Markdown的话，需要安装Markdown的解释器，并且在你的_config.yml里面设置<code>markdown:rdiscount</code></p>
+
+<pre><code>$ gem install jekyll rdiscount
+</code></pre>
+
+<h4>Jekyll 的使用</h4>
+
+<p>切换到你的博客目录，输入命令：</p>
+
+<pre><code>$ jekyll serve --watch
+</code></pre>
+
+<p>然后就可以通过端口<code>localhost:4000</code>来访问你的主页了。</p>
+
+<h3>Jekyll 模板系统</h3>
+
+<h2>购买、绑定独立域名</h2>
+
+<h2>使用GitHub Pages建立博客</h2>
+
+<h2>使用Disqus 实现评论功能</h2>
+
+<h2>代码高亮插件</h2>
+
+<h2>外部样式</h2>
+
+<h2>结语</h2>
+
+
+		<!-- 分享 -->
+		<div id="share-button" style="float:right; line-height: 22px; height:22px;">
+			<b>分享：</b>
+			<wb:share-button addition="simple" type="icon" ralateUid="1948705855"></wb:share-button>
+		</div>
+
+		<!-- 评论 -->
+		<div id="disqus_thread"></div>
+		<script>
+			(function() {  // DON'T EDIT BELOW THIS LINE
+				var d = document, s = d.createElement('script');
+
+				s.src = '//jerakrs.disqus.com/embed.js';
+
+				s.setAttribute('data-timestamp', +new Date());
+				(d.head || d.body).appendChild(s);
+			})();
+		</script>
+		<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+	</div>
+
+	<a id="gotop" href="#">
+		<span>▲</span>
+	</a>
+</div>
+
+<script src="/js/post.js" type="text/javascript"></script>
+<script src="http://qzonestyle.gtimg.cn/qzone/app/qzlike/qzopensl.js#jsdate=20111201" charset="utf-8"></script>
+<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
+
+<script type="text/javascript">
+	(function(){
+		var p = {
+			url:location.href,
+			showcount:'1',/*是否显示分享总数,显示：'1'，不显示：'0' */
+			desc:'',/*默认分享理由(可选)*/
+			summary:'',/*分享摘要(可选)*/
+			title:'',/*分享标题(可选)*/
+			site:'JeraKrs.com',
+			pics:'', /*分享图片的路径(可选)*/
+			style:'203',
+			width:22,
+			height:22
+		};
+		var s = [];
+		for(var i in p){
+			s.push(i + '=' + encodeURIComponent(p[i]||''));
+		}
+		$('#share-button').append(['<a version="1.0" class="qzOpenerDiv" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?',s.join('&'),'" target="_blank" style="margin-top:10px">分享</a>'].join(''));
+	})();
+</script>
+
+
+			<script type="text/javascript">
+				$(function(){
+					$('.home-follow').click(function(e){
+						e.preventDefault();
+						$('.home-contact').fadeToggle("slow")
+					});
+				})
+			</script>
+	</body>
+</html>
