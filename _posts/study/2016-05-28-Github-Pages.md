@@ -10,9 +10,9 @@ category: study
 ## Github Pages
 如何使用、安装Git我就不多说了，但是使用[Github Pages][]，首先要注意的是Github Pages采用的是HTTP协议，不是HTTPS，区别在于HTTPS协议是由SSL+HTTP协议构建的可进行加密传输、身份认证的网络协议，所以不要做一些敏感的操作处理，比如发送用户密码；并且Github Pages限制每月带宽为100GB和10000次请求，每个站点有1G的空间，对于个人博客而言绰绰有余了，当然这个限额并不是说超过了就会怎样，只是Github会发邮件建议你将网站搬到其它平台上。
 
-你也可以选择使用[WordPress][]搭建个人博客，一种使用PHP语言开发的博客平台，用户可以在支持PHP和MySQL数据库的服务器上架设属于自己的网站。
+你也可以选择使用[WordPress][]搭建个人博客，WordPress一种使用PHP语言开发的博客平台，用户可以在支持PHP和MySQL数据库的服务器上架设属于自己的网站。
 
-而我选择Github Pages是因为以下几个优点：
+而我选择使用Github Pages是因为以下几个优点：
 
 * 轻量级的博客系统，不需要麻烦的配置
 * 可以使用自己喜欢的编辑器或标记语言，比如[Markdown][]
@@ -32,7 +32,7 @@ GitHub Pages为了提供对HTML内容的支持，选择了Jekyll作为模板系�
 
 安装Jekyll是一个很简单的过程。但是有时候因为你的电脑的一些配置，前提环境的问题，又会变得很复杂。所需要的前提环境有：
 
-* 需要有Ruby
+* 需要安装有Ruby
 * 在Ruby的基础上，安装好RubyGems
 * Linux, Unix, or Mac OS X
 * Python
