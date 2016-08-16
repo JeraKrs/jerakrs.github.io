@@ -5,15 +5,15 @@ layout: home
 <div class="index-content study">
 	<div class="section">
 		<ul class="artical-cate">
-			<li class="on"><a href="/"><span>开发</span></a></li>
-			<li style="text-align:center"><a href="/Pages/life"><span>生活</span></a></li>
-			<li style="text-align:right"><a href="/Pages/algorithm"><span>算法</span></a></li>
+			<li class="on"><a href="/"><span>Note</span></a></li>
+			<li style="text-align:center"><a href="/Pages/life"><span>Life</span></a></li>
+			<li style="text-align:right"><a href="/Pages/algorithm"><span>Alg</span></a></li>
 		</ul>
 
 		<div class="cate-bar"><span id="cateBar"></span></div>
 		
 		<ul class="artical-list">
-			{% for post in site.categories.study %}
+			{% for post in site.categories.note %}
 			<li>
 			<h2><a href="{{ post.url }}">{{ post.title }}
 			<dd style="font-size:10px; float:right">{{ post.date | date_to_string }}</dd>

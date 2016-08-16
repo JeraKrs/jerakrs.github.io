@@ -2,7 +2,7 @@
 layout: post
 title: 使用Github Pages搭建个人博客
 description: Github作为一个代码社区，管理着许多项目代码，为了使项目能够清晰直观地呈现给别人，介绍文档是不可或缺的，甚至有时需要一个完整的文档站。而Github Pages就是提供给用户用于介绍托管在Github上的项目，并且使用它可以很方便的建立自己的独立博客，并且免费。
-category: study
+category: note
 ---
 
 开始写博客已经有三年了，一开始写博客是因为学习算法，在各种不同的OJ上刷题，然后写题解。后来觉得社区提供的版面样式太单一了，所以萌生了自己搭建博客站点的想法，而且有自己独立的域名也是挺酷的一件事。最近几天跟着网上的教程自己动手搭了博客，所以写篇文章分享下经验。
@@ -163,7 +163,7 @@ GitHub Pages分两种，一种是你的GitHub用户名建立的`username.github.
 
 Disqus 使用起来很方便，注册用户后，点击`Admin`：
 
-![Alt text](/Images/blogs/2016-05-28-01.png)
+![Alt text](/Images/blogs/note/2016-05-28-01.png)
 
 选择`Installing Disqus`，会跳转至选择平台的页面，选择`Universal Code`，Disqus会根据你的账户生成一段代码，复制到你的源码中。
 

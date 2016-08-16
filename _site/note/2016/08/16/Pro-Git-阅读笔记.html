@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!--
+		* Author:         Jerakrs
+		-->
+
+		<meta charset="utf-8" />
+
+		<title> Pro Git 阅读笔记 | JeraKrs.com</title>
+
+		<meta name="author" content="JeraKrs" />
+		<meta name="description" content="JeraKrs's Blog" />
+		<meta name="renderer" content="webkit">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0"> <!-- 自适应分辨率 -->
+
+		<link rel="stylesheet" href="/css/default.css" type="text/css" />
+		<link rel="shortcut icon" href="/Images/favicon.jpg" type="image/x-icon" />  <!-- 设置图标 -->
+
+		<html xmlns:wb="http://open.weibo.com/wb"> <!-- 微博分享 -->
+
+		<script src="/js/jquery-1.7.1.min.js" type="text/javascript"></script>
+
+		</head>
+
+		<body>
+
+			<div class="home-menu">
+				<div class="home-menu-info">
+					<a class="home-info" href="/">JeraKrs</a>
+					<a class="home-follow" href="#" title="Contact Me">+</a>
+				</div>
+
+				<div class="home-contact">
+					<a href="http://weibo.com/JeraKrs/" target="_blank"><img src="http://www.weibo.com/favicon.ico" alt="" width="22"/></a>
+					<a href="https://www.douban.com/people/BearChild-/" target="_blank"><img src="http://www.douban.com/favicon.ico" alt="" width="22"/></a>
+					<a href="https://github.com/JeraKrs" target="_blank"><img src="https://github.com/fluidicon.png" alt="" width="22"/></a>
+				</div>
+			</div>
+
+			<link rel="stylesheet" href="/js/prettify/prettify.css" />
+
+<style type="text/css">
+	body { background:#e8e8e8; }
+	@media screen and (max-width: 800px){
+		body { background:#ffffff; }
+	}
+</style>
+
+<div id="content">
+
+	<div class="sidemenu">
+		<iframe width="100%" height="75" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=75&fansRow=2&ptype=1&speed=0&skin=1&isTitle=0&noborder=0&isWeibo=0&isFans=0&uid=1948705855&verifier=46dde484&dpc=1"></iframe>
+	</div>
+
+	<div class="blog">
+		<h1 class="blog-title"><a href="/note/2016/08/16/Pro-Git-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0.html" title="Pro Git 阅读笔记">Pro Git 阅读笔记</a></h1>
+		<p class="blog-date">2016-08-16</p>
+
+		<h2>起步</h2>
+
+<h3>关于版本控制</h3>
+
+<ul>
+<li>本地版本控制系统：采用某种简单的数据库来记录文件的历次更新差异，工作原理基本上就是保存并管理文件补丁（patch）；文件补丁是一种特定格式的文本文件，记录着对应文件修订前后的内容变化</li>
+<li>集中化版本控制系统（Centralized Version Control Systems）：通过一个单一的集中管理的服务器，保存所有文件的修订版本，而协同工作的人们都通过客户端连到这台服务器，取出最新的文件或者提交更新</li>
+<li>分布式版本控制系统（Distributed Version Control System）：客户端并不只提取最新版本的文件快照，而是把代码仓库完整地镜像下来</li>
+</ul>
+
+
+<h3>Git 简介</h3>
+
+<h4>直接记录快照，而非差异比较</h4>
+
+<p>Git 只关心文件数据的整体是否发生变化，而大多数其他系统则只关心文件内容的具体差异；若文件数据发生变化，Git 会将文件作快照后，记录在一个微型的文件系统中；每次提交更新时，它会纵览一遍所有文件的指纹信息并对文件作一快照，然后保存一个指向这次快照的索引；若文件没有变化，Git 不会再次保存，而只对上次保存的快照作一链接。</p>
+
+<h4>近乎所有操作都是本地执行</h4>
+
+<p>Git 在本地磁盘上就保存着所有当前项目的历史更新。</p>
+
+<h4>时刻保持数据完整性</h4>
+
+<p>在保存到 Git 之前，所有数据都要进行内容的校验和（checksum）计算，并将此结果作为数据的唯一标识和索引（而不是文件名）；Git 使用 SHA-1 算法计算数据的校验和，通过对文件的内容或目录的结构计算出一个 SHA-1 哈希值，作为指纹字符串。该字串由 40 个十六进制字符（0-9 及 a-f）组成，看起来就像是：
+<code>
+24b9da6552252987aa493b52f8696cd6d3b00373
+</code></p>
+
+<h4>多数操作仅添加数据</h4>
+
+<p>常用的 Git 操作大多仅仅是把数据添加到数据库。因为任何一种不可逆的操作，比如删除数据，都会使回退或重现历史版本变得困难重重。</p>
+
+<h4>文件的三种状态</h4>
+
+<ul>
+<li>工作目录（Working Directory）：修改文件但是并未通过git跟踪</li>
+<li>暂存区域（Stage）：在版本库中，在<code>git add</code>命令后，文件会被添加到暂存区</li>
+<li>本地仓库（Repository）：工作区中的隐藏目录<code>.git</code>，执行<code>git commit</code>命令将暂存区域的修改提交</li>
+</ul>
+
+
+<h3>安装 Git</h3>
+
+<p><a href="http://git.oschina.net/progit/1-%E8%B5%B7%E6%AD%A5.html#1.4-%E5%AE%89%E8%A3%85-Git">安装教程</a></p>
+
+<h3>Git 配置</h3>
+
+<ul>
+<li><code>/etc/gitconfig</code> 文件：系统中对所有用户都普遍适用的配置；若使用 <code>git config</code> 时用 <code>--system 选项</code>，读写的文件</li>
+<li><code>~/.gitconfig</code> 文件：用户目录下的配置文件只适用于该用户；若使用 <code>git config</code> 时用 <code>--global</code> 选项，读写的文件</li>
+<li><code>.git/config</code>文件：当前项目的 <code>git</code> 目录中的配置文件；配置仅仅针对当前项目有效</li>
+</ul>
+
+
+<p><em>每一个级别的配置都会覆盖上层的相同配置</em></p>
+
+<pre><code># 用户信息
+$ git config --global user.name "username"
+$ git config --global user.email "usermail@example.com"
+
+# 文本编辑器
+$ git config --global core.editor emacs
+
+# 差异分析工具
+$ git config --global merge.tool vimdiff
+
+# 查看配置信息
+$ git config --list
+</code></pre>
+
+<h3>获取帮助</h3>
+
+<pre><code>$ git help &lt;verb&gt;
+$ git &lt;verb&gt; --help
+$ man git-&lt;verb&gt;
+</code></pre>
+
+<hr />
+
+<h2>Git 基础</h2>
+
+<h3>取得项目的 Git 仓库</h3>
+
+<ul>
+<li>初始化仓库：<code>git init</code></li>
+<li>从现有仓库克隆：<code>$ git clone git:$url</code></li>
+<li>克隆仓库并重命名：<code>$ git clone git:$url $name</code></li>
+</ul>
+
+
+<p><em>Git 支持许多数据传输协议</em></p>
+
+<h3>记录每次更新到仓库</h3>
+
+<ul>
+<li>检查文件状态：<code>git status</code></li>
+<li>跟踪新文件：<code>git add $file</code></li>
+<li>记录移除文件：<code>git rm $file</code></li>
+<li>移除暂存区域文件：<code>git rm -f $file</code></li>
+<li>移除跟踪记录：<code>git rm --cached $file</code>（在暂存区中消失，工作区仍可见）</li>
+<li>提交操作至仓库：<code>git commit -m"$info"</code></li>
+<li>跳过暂存区域提交操作至仓库：<code>git commit -a -m"$info"</code></li>
+<li>显示在工作区域文件的修改：<code>git diff</code></li>
+<li>显示在暂存区域文件的修改：<code>git diff --cached</code></li>
+<li>重命名操作：<code>git mv $old_name $new_name</code></li>
+</ul>
+
+
+<p><em>忽略某些文件</em>，创建一个名为 <code>.gitignore</code> 的文件，列出需要忽略的文件</p>
+
+<ul>
+<li>所有空行或者以注释符号 ＃ 开头的行都会被 Git 忽略</li>
+<li>可以使用标准的 glob 模式匹配（glob 模式是指 shell 所使用的简化了的正则表达式）</li>
+<li>匹配模式最后跟反斜杠（/）说明要忽略的是目录</li>
+<li>要忽略指定模式以外的文件或目录，可以在模式前加上惊叹号（!）取反</li>
+</ul>
+
+
+<h3>查看历史提交</h3>
+
+<ul>
+<li>查看所有提交记录：<code>git log</code>
+
+<ul>
+<li><code>-p</code>: 按补丁格式显示每个更新之间的差异</li>
+<li><code>-&lt;n&gt;</code>: 输出最近n条提交记录</li>
+<li><code>--stat</code>: 显示每次更新的文件修改统计信息</li>
+<li><code>--shortstat</code>: 只显示 --stat 中最后的行数修改添加移除统计</li>
+<li><code>--name-only</code>: 仅在提交信息后显示已修改的文件清单</li>
+<li><code>--name-status</code>: 显示新增、修改、删除的文件清单</li>
+<li><code>--abbrev-commit</code>: 仅显示 SHA-1 的前几个字符，而非所有的 40 个字符</li>
+<li><code>--relative-date</code>: 使用较短的相对时间显示（比如，“2 weeks ago”）</li>
+<li><code>--graph</code>: 显示 ASCII 图形表示的分支合并历史。</li>
+<li><code>--pretty</code>: 使用其他格式显示历史提交信息。可用的选项包括 oneline，short，full，fuller 和 format（后跟指定格式）</li>
+<li><code>--since=""</code>: 限定查看记录的起始时间</li>
+<li><code>--until=""</code>: 限定查看记录的终止时间</li>
+<li><code>--author</code>: 仅显示指定作者相关的提交</li>
+<li><code>--committer</code>: 仅显示指定提交者相关的提交</li>
+</ul>
+</li>
+</ul>
+
+
+<pre><code># 自定义展示形式：`--pretty=format="%h - %an, %ar : %s"`
+# 占位符含义
+%H 提交对象（commit）的完整哈希字串
+%h 提交对象的简短哈希字串
+%T 树对象（tree）的完整哈希字串
+%t 树对象的简短哈希字串
+%P 父对象（parent）的完整哈希字串
+%p 父对象的简短哈希字串
+%an 作者（author）的名字
+%ae 作者的电子邮件地址
+%ad 作者修订日期（可以用 -date= 选项定制格式）
+%ar 作者修订日期，按多久以前的方式显示
+%cn 提交者(committer)的名字
+%ce 提交者的电子邮件地址
+%cd 提交日期
+%cr 提交日期，按多久以前的方式显示
+%s 提交说明
+</code></pre>
+
+<h3>撤销操作</h3>
+
+<ul>
+<li>修改最后一次提交：<code>git commit --amend</code></li>
+<li>取消已经暂存的文件：<code>git reset HEAD $filename</code></li>
+<li>取消对文件的修改：<code>git checkout -- $filename</code></li>
+</ul>
+
+
+<h3>远程仓库</h3>
+
+<ul>
+<li>查看当前的远程库：<code>git remote</code></li>
+<li>查看远程库的克隆地址：<code>git remote -v</code></li>
+<li>添加远程仓库：<code>git remote add $name $url</code></li>
+<li>获取远程仓库的信息：<code>git fetch $name</code><em>fetch 命令只是将远端的数据拉到本地仓库，并不自动合并到当前工作分支，只有当你确实准备好了，才能手工合并</em></li>
+<li>推送数据到远程仓库：<code>git push $remote $branch</code></li>
+<li>查看远程仓库信息：<code>git remote show $remote</code></li>
+<li>远程仓库的重命名：<code>git remote rename $oldname $newname</code></li>
+<li>远程仓库的删除：<code>git remote rm $remote</code></li>
+</ul>
+
+
+<h3>标签</h3>
+
+<ul>
+<li>列出所有标签：<code>git tag</code></li>
+<li>搜索模式列出符合条件的标签：<code>git tag -l 'v1.4.2.*'</code></li>
+<li>新建含附注的标签：<code>git tag -a $tag -m '$info'</code></li>
+<li>查看标签信息：<code>git show $tag</code></li>
+<li>用私钥标记一个标签：<code>git tag -s $tag</code></li>
+<li>新建轻量级标签：<code>git tag $tag</code></li>
+<li>验证标签：<code>git tag -v $tag</code></li>
+<li>在指定提交上打标签：<code>git tag $tag $commit_id</code></li>
+<li>分享标签：<code>git push origin $tag</code></li>
+<li>分享所有标签：<code>git push origin --tags</code></li>
+<li>删除一个标签：<code>git tag -d $tag_name</code></li>
+<li>删除已经推送的远程标签：（先在本地删除）<code>git push origin :refs/tags/$tag_name</code></li>
+</ul>
+
+
+<h3>版本回退</h3>
+
+<ul>
+<li>退回前一个版本：<code>git reset --hard HEAD^</code></li>
+<li>退回某个版本：<code>git reset --hard $id</code></li>
+</ul>
+
+
+<hr />
+
+<h2>分支</h2>
+
+<h3>创建和切换分支</h3>
+
+<ul>
+<li>创建分支：<code>git branch $branch</code></li>
+<li>切换分支：<code>git checkout $branch</code></li>
+<li>创建并切换分支：<code>git checkout -b $branch</code></li>
+</ul>
+
+
+<h3>分支的合并和删除</h3>
+
+<ul>
+<li>将分支合并到当前分支上：<code>git merge $branch</code></li>
+<li>删除分支：<code>git branch -d $branch</code></li>
+<li>丢弃一个没有被合并过的分支：<code>git branch -D $branch</code></li>
+<li>在本地删除远程分支：<code>git branch -r -d $remote/$branch</code></li>
+<li>删除远程仓库上的分支：<code>git push $remote :$branch</code></li>
+</ul>
+
+
+<h3>遇到冲突的分支合并</h3>
+
+<p>冲突必须手动解决后再提交，<code>git status</code>可以查看冲突文件。Git会用<code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code>，<code>=======</code>，<code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code>标记出不同分支的内容。
+合并分支时，如果可能，Git会用Fast forward模式（直接移动HEAD指针），但这种模式下，删除分支后，会丢掉分支信息。如果要强制禁用Fast forward模式，Git就会在merge时生成一个新的commit，这样，从分支历史上就可以看出分支信息。首先，master分支应该是非常稳定的，也就是仅用来发布新版本，平时不能在master分支上修改。合并分支时，加上--no-ff参数就可以用普通模式合并，合并后的历史有分支，能看出来曾经做过合并，而fast forward合并就看不出来曾经做过合并。</p>
+
+<h3>分支的管理</h3>
+
+<ul>
+<li>查看所有分支：<code>git branch</code></li>
+<li>查看所有分支的最后一个提交对象：<code>git branch -v</code></li>
+<li>列出与当前分支合并的分支：<code>git branch --merge</code></li>
+<li>列出未与当前分支合并的分支：<code>git branch --on-merged</code></li>
+<li>推送本地分支：<code>git branch $remote $branch</code></li>
+<li>抓取远程库分支：<code>git checkout -b $branch origin/$branch</code></li>
+<li>设置本地分支与远程库对应分支连接：<code>git branch --set-upstream $branch origin/$branch</code></li>
+</ul>
+
+
+<h3>跟踪远程分支</h3>
+
+<p>从远程分支<code>checkout</code>出来的本地分支，跟踪分支是一种和某个远程分支有直接联系的本地分支，在跟踪分支中输入<code>git push</code>和<code>git pull</code></p>
+
+<ul>
+<li>当前分支跟踪远程某个分支：<code>git checkout --track $branch $remote/$branch</code></li>
+</ul>
+
+
+<h3>分支的衍合</h3>
+
+<ul>
+<li>将当前分支的修改衍合到指定分支上：<code>git rebase $branch</code></li>
+</ul>
+
+
+<p><code>git rebase --onto master server client</code>：取出 client 分支，找出 client 分支和 server 分支的共同祖先之后的变化，然后把它们在 master 上重演一遍。</p>
+
+<p><strong>一旦分支中的提交对象发布到公共仓库，就千万不要对该分支进行衍合操作</strong></p>
+
+<hr />
+
+<h2>服务器上的 Git</h2>
+
+<h3>协议</h3>
+
+<ul>
+<li><strong>本地协议</strong>：本地协议（Local protocol），所谓的远程仓库在该协议中的表示，就是硬盘上的另一个目录。<code>git clone file://$pwd</code></li>
+<li><strong>SSH 协议</strong>：同时支持读写操作的网络协议。<code>git clone ssh://$pwd</code></li>
+<li><strong>Git 协议</strong>： 一个包含在 Git 软件包中的特殊守护进程； 它会监听一个提供类似于 SSH 服务的特定端口（9418）。</li>
+<li><strong>HTTP/S 协议</strong>：<code>git clone http://$pwd</code></li>
+</ul>
+
+
+<h3>在服务器上部署 Git</h3>
+
+<ul>
+<li>克隆裸仓库：<code>git clone --bare $repertory $repertory.git</code></li>
+<li>把裸仓库移到服务器上：<code>scp -r $repertory user@git.example.com:/$pwd</code></li>
+</ul>
+
+
+<h3>用户权限</h3>
+
+<h4>增加推送权限</h4>
+
+<ul>
+<li>给每个人建立一个账户</li>
+<li>在主机上建立一个 git 账户，让每个需要写权限的人发送一个 SSH 公钥，然后将其加入 git 账户的 <code>~/.ssh/authorized_keys</code>文件。生成SSH公钥：<code>ssh-keygen</code></li>
+</ul>
+
+
+<h4>限制git用户活动范围</h4>
+
+<p>编辑 <code>/etc/passwd</code>，在文件末尾，将<code>git:x:1000:1000::/home/git:/bin/sh</code>改成<code>git:x:1000:1000::/home/git:/usr/bin/git-shell</code>。</p>
+
+<h4>公共访问（只读）</h4>
+
+<ul>
+<li>开启挂钩</li>
+</ul>
+
+
+<pre><code>$ cd project.git
+$ mv hooks/post-update.sample hooks/post-update
+$ chmod a+x hooks/post-update
+</code></pre>
+
+<ul>
+<li><code>/opt/git</code> 目录的 Unix 用户组设定为 <code>www-data</code></li>
+</ul>
+
+
+<pre><code>$ chgrp -R www-data /opt/git
+</code></pre>
+
+<h3>GitWeb</h3>
+
+<p>...</p>
+
+<h3>Gitosis</h3>
+
+<p>...</p>
+
+<h3>Gitolite</h3>
+
+<p>...</p>
+
+<h3>Git 守护进程</h3>
+
+<p>...</p>
+
+<h3>Git 托管服务</h3>
+
+<p>...</p>
+
+<hr />
+
+<h2>分布式 Git</h2>
+
+<h3>分布式工作流</h3>
+
+<h4>集中式工作流</h4>
+
+<p><img src="/Images/blogs/note/2016-08-16-01.png" alt="Alt text" /></p>
+
+<p>如果两个开发者从中心仓库克隆代码下来，同时作了一些修订，那么只有第一个开发者可以顺利地把数据推送到共享服务器；第二个开发者在提交他的修订之前，必须先下载合并服务器上的数据，解决冲突之后才能推送数据到共享服务器上。</p>
+
+<h4>集成管理员工作流</h4>
+
+<p><img src="/Images/blogs/note/2016-08-16-02.png" alt="Alt text" /></p>
+
+<ul>
+<li>项目维护者可以推送数据到公共仓库 blessed repository</li>
+<li>贡献者克隆此仓库，修订或编写新代码</li>
+<li>贡献者推送数据到自己的公共仓库 developer public</li>
+<li>贡献者给维护者发送邮件，请求拉取自己的最新修订</li>
+<li>维护者在自己本地的 integration manger 仓库中，将贡献者的仓库加为远程仓库，合并更新并做测试</li>
+<li>维护者将合并后的更新推送到主仓库 blessed repository</li>
+</ul>
+
+
+<p><strong>司令官与副官工作流</strong></p>
+
+<p><img src="/Images/blogs/note/2016-08-16-03.png" alt="Alt text" /></p>
+
+<ul>
+<li>一般的开发者在自己的特性分支上工作，并不定期地根据主干分支（dictator 上的 master）衍合</li>
+<li>副官（lieutenant）将普通开发者的特性分支合并到自己的 master 分支中</li>
+<li>司令官（dictator）将所有副官的 master 分支并入自己的 master 分支</li>
+<li>司令官（dictator）将集成后的 master 分支推送到共享仓库 blessed repository 中，以便所有其他开发者以此为基础进行衍合</li>
+</ul>
+
+
+<h3>贡献代码</h3>
+
+<h4>提交指南</h4>
+
+<p>提交说明最好限制在一行以内，50 个字符以下，简明扼要地描述更新内容，空开一行后，再展开详细注解.</p>
+
+<h4>私有的小型团队</h4>
+
+<p>先在自己的特性分支中工作一段时间，完成后合并到自己的 master 分支；然后下载合并 origin/master 上的更新（如果有的话），再推回远程服务器。</p>
+
+<h4>私有团队间协作</h4>
+
+<p>多个小组间并行工作，而在稍后恰当时机再行合并。通过共享远程分支的方式，无需干扰整体项目代码便可以开展工作。</p>
+
+<h4>公开的小型项目</h4>
+
+<p>从原始项目fork出一个自己可写的公共仓库，然后将自己的修改提交到这个公共仓库上，之后通知项目管理员来抓取你的代码：</p>
+
+<ul>
+<li>直接用 GitHub 等网站提供的 <code>pull request</code> 按钮自动发送请求通知</li>
+<li>手工把 <code>git request-pull</code> 命令输出结果电邮给项目管理员；request-pull 命令接受两个参数，第一个是本地特性分支开始前的原始分支，第二个是请求对方来抓取的 Git 仓库 URL：<code>git request-pull $branch $remote</code></li>
+</ul>
+
+
+<h4>公开大型项目</h4>
+
+<p>通过开发者邮件列表接受补丁；<code>git format-patch</code> 命令来生成 mbox 格式的文件然后作为附件发送，每个提交都会封装为一个 <code>.patch</code> 后缀的 mbox 文件；<code>-M</code> 选项允许 Git 检查是否有对文件重命名的提交。</p>
+
+<h4>通过命令行发送邮件</h4>
+
+<ul>
+<li>在<code>~/.gitconfig</code>文件中配置imap项</li>
+</ul>
+
+
+<pre><code>[imap]
+    folder = "[Gmail]/Drafts"
+    host = imaps://imap.gmail.com
+    user = user@gmail.com
+    pass = password
+    port = 993
+    sslverify = false
+# 如果 IMAP 服务器没有启用 SSL，就无需配置最后那两行，并且 host 应该以 imap:// 开头而不再是有 s 的 imaps://
+</code></pre>
+
+<ul>
+<li>同过命令将补丁作为邮件依次发送到指定IMAP服务器上的文件夹中：<code>git send-email *.patch</code></li>
+</ul>
+
+
+<h3>项目的管理</h3>
+
+<h4>特性分支</h4>
+
+<p>如果想要集成新的代码进来，最好局限在特性分支上做；创建的分支可以用相关的主题关键字命名；在准备妥当后，可以试着将别人贡献的代码合并进来。</p>
+
+<h4>采纳来自邮件的补丁</h4>
+
+<ul>
+<li><p>使用 apply 命令应用补丁：如果收到的补丁文件是用 git diff 或由其它 Unix 的 diff 命令生成，就该用 git apply 命令来应用补丁</p>
+
+<pre><code>  $ git apply $patch.patch
+  # 在打补丁前可以测试是否兼容
+  $ git apply --check $patch.patch
+</code></pre></li>
+</ul>
+
+
+<p>如果是 git diff 格式描述的补丁，此命令还会相应地添加，删除，重命名文件。而普通的 patch 命令是不会的；此外，<code>git apply</code>是一个事务性操作的命令，会将所有补丁全部打上。</p>
+
+<ul>
+<li><p>使用 am 命令应用补丁：对于 <code>format-patch</code> 制作的新式补丁，应当使用 <code>git am</code> 命令</p>
+
+<pre><code>  $ git am $patch.patch
+</code></pre></li>
+</ul>
+
+
+<p>打上补丁后Git会自动创建新的提交对象，Commit 部分显示的是采纳补丁的人，以及采纳的时间；Author 部分则显示的是原作者，以及创建补丁的时间。<br>
+遇到打不上补丁的情况，多半是因为主干分支和补丁的基础分支相差太远，但也可能是因为某些依赖补丁还未应用。这种情况下，git am 会报错并询问该怎么做，Git 会在有冲突的文件里加入冲突解决标记，这同合并或衍合操作一样。解决的办法也一样，先编辑文件消除冲突，然后暂存文件，最后运行 <code>git am --resolved</code> 提交修正结果。</p>
+
+<h4>检出远程分支</h4>
+
+<p>添加提交者的远程仓库，并抓取相应分支。</p>
+
+<h4>决断代码取舍</h4>
+
+<ul>
+<li>查看分支的新增提交：<code>git log $branch --not master</code>（屏蔽master分支提交）</li>
+</ul>
+
+
+<h4>代码集成</h4>
+
+<ul>
+<li>合并流程：在 master 分支中维护稳定代码，然后在特性分支上开发新功能，或是审核测试别人贡献的代码，接着将它并入主干，最后删除这个特性分支</li>
+<li>大项目的合并流程：用于发布的 master 分支、用于合并基本稳定特性的 next 分支、用于合并仍需改进特性的 pu （proposed updates）分支，以及用于除错维护的 maint 分支（maintenance）</li>
+<li>衍合与挑拣（cherry-pick）的流程：通过衍合或者挑拣贡献者的代码，而不是简单的合并，这样能够保持线性的提交历史</li>
+</ul>
+
+
+<h4>给发行版签名</h4>
+
+<p><a href="http://git.oschina.net/progit/5-%E5%88%86%E5%B8%83%E5%BC%8F-Git.html#5.3-%E9%A1%B9%E7%9B%AE%E7%9A%84%E7%AE%A1%E7%90%86">...</a></p>
+
+<h4>生成内部版本号</h4>
+
+<p><code>git describe $branch</code>：返回一个字符串，由三部分组成：最近一次标定的版本号，加上自那次标定之后的提交次数，再加上一段SHA-1值表示每次提交的描述；git describe命令只适用于有标注的标签（通过-a或者-s选项创建的标签）。</p>
+
+<h4>准备发布</h4>
+
+<p><code>git archive $branch --prefex='$folder' | gzip &gt; '$file'.tar.gz</code>：发布并压缩打包的文件夹</p>
+
+<h4>制作简报</h4>
+
+<p><code>$ git shortlog --no-merges $branch --not $version</code>：列出自从上次发布之后的所有提交的简介</p>
+
+<hr />
+
+<h2>Git 工具</h2>
+
+<h3>修订版本（revision）</h3>
+
+<ul>
+<li>显示唯一的<code>SHA-1</code>码：<code>git log --abbrev-commit</code></li>
+<li>查看分支指向的<code>SHA-1</code>码：<code>git rev-parse $branch</code></li>
+<li>查看引用日志：<code>git reflog</code></li>
+</ul>
+
+
+<p><strong>提交范围</strong></p>
+
+<ul>
+<li>双点：<code>git log $master..$branch</code></li>
+<li>多点：<code>git log refA refB ^refC</code> &amp; <code>git log refA refB --not refC</code></li>
+<li>三点：<code>git log $master...$branch</code> &amp; <code>git log --left-right $master...$branch</code></li>
+</ul>
+
+
+<h3>交互式暂存</h3>
+
+<ul>
+<li>进入交互式暂存：<code>git add -i</code> &amp; <code>git add --interactive</code></li>
+</ul>
+
+
+<h3>储藏（Stashing）</h3>
+
+<ul>
+<li>工作区状态保存：<code>git stash</code></li>
+<li>查看保存的工作状态：<code>git stash list</code></li>
+<li>恢复工作区状态：<code>git stash apply --index</code></li>
+<li>删除保存的工作去状态：<code>git stash drop $stash</code></li>
+<li>恢复工作区状态的同时把保存内容删除：<code>git stash pop</code></li>
+<li>从储藏中建立分支：<code>git stash branch $branch</code></li>
+</ul>
+
+
+<h3>重写历史</h3>
+
+<p><a href="http://git.oschina.net/progit/6-Git-%E5%B7%A5%E5%85%B7.html#6.4-%E9%87%8D%E5%86%99%E5%8E%86%E5%8F%B2">...</a></p>
+
+<hr />
+
+<h2>自定义 Git</h2>
+
+<p><a href="http://git.oschina.net/progit/7-%E8%87%AA%E5%AE%9A%E4%B9%89-Git.html">...</a></p>
+
+<hr />
+
+<h2>Git 与其他系统</h2>
+
+<p><a href="http://git.oschina.net/progit/8-Git-%E4%B8%8E%E5%85%B6%E4%BB%96%E7%B3%BB%E7%BB%9F.html">...</a></p>
+
+<hr />
+
+<h2>Git 内部原理</h2>
+
+<p><a href="http://git.oschina.net/progit/9-Git-%E5%86%85%E9%83%A8%E5%8E%9F%E7%90%86.html">...</a></p>
+
+<hr />
+
+<h2>参考文献</h2>
+
+<ul>
+<li><a href="http://git.oschina.net/progit/">Pro Git 中文版</a></li>
+</ul>
+
+
+
+		<!-- 分享 -->
+		<div id="share-button" style="float:right; line-height: 22px; height:22px;">
+			<b>分享：</b>
+			<wb:share-button addition="simple" type="icon" ralateUid="1948705855"></wb:share-button>
+		</div>
+
+		<!-- 评论 -->
+		<div id="disqus_thread"></div>
+		<script>
+			(function() {  // DON'T EDIT BELOW THIS LINE
+				var d = document, s = d.createElement('script');
+
+				s.src = '//jerakrs.disqus.com/embed.js';
+
+				s.setAttribute('data-timestamp', +new Date());
+				(d.head || d.body).appendChild(s);
+			})();
+		</script>
+		<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+	</div>
+
+	<a id="gotop" href="#">
+		<span>▲</span>
+	</a>
+</div>
+
+<script src="/js/post.js" type="text/javascript"></script>
+<script src="http://qzonestyle.gtimg.cn/qzone/app/qzlike/qzopensl.js#jsdate=20111201" charset="utf-8"></script>
+<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
+
+<script type="text/javascript">
+	(function(){
+		var p = {
+			url:location.href,
+			showcount:'1',/*是否显示分享总数,显示：'1'，不显示：'0' */
+			desc:'',/*默认分享理由(可选)*/
+			summary:'',/*分享摘要(可选)*/
+			title:'',/*分享标题(可选)*/
+			site:'JeraKrs.com',
+			pics:'', /*分享图片的路径(可选)*/
+			style:'203',
+			width:22,
+			height:22
+		};
+		var s = [];
+		for(var i in p){
+			s.push(i + '=' + encodeURIComponent(p[i]||''));
+		}
+		$('#share-button').append(['<a version="1.0" class="qzOpenerDiv" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?',s.join('&'),'" target="_blank" style="margin-top:10px">分享</a>'].join(''));
+	})();
+</script>
+
+
+			<script type="text/javascript">
+				$(function(){
+					$('.home-follow').click(function(e){
+						e.preventDefault();
+						$('.home-contact').fadeToggle("slow")
+					});
+				})
+			</script>
+	</body>
+</html>
