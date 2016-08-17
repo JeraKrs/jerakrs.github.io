@@ -3,6 +3,7 @@ layout: default
 ---
 <link rel="stylesheet" href="/css/font-awesome/css/font-awesome.min.css">
 <link rel="stylesheet" href="/css/timeline.css">
+<script src="/js/about.js" type="text/javascript"></script>
 
 <div class="index-content about">
 
@@ -115,195 +116,11 @@ layout: default
 
 			<div class="info-body">
 
-				<div class="line-warp">
+				<div class="line-warp" id = "timeline-body">
 
 					<div class="timeline-header">
             			<span class="badge"><span class="fa fa-clock-o"></span>My Timeline</span>
         			</div>
-
-        			<div class="line-item">
-            			<div class="line-icon-warp ">
-              				<span class="fa-stack fa-lg">
-                 			<i class="fa fa-circle fa-stack-2x" style="color: #FFC125"></i>
-                			<i class="fa fa-lightbulb-o fa-stack-1x" style="color: #ffffff"></i>
-               				</span>
-                			<span class="badge"> &nbsp;&nbsp;Just Now&nbsp;&nbsp; </span>
-            			</div>
-
-            			<div class="line-content-box">
-							Just fucking!
-            			</div>
-        			</div>
-
-
-        			<div class="line-item">
-            			<div class="line-icon-warp ">
-              				<span class="fa-stack fa-lg">
-			     			    <i class="fa fa-circle fa-stack-2x" style="color: #CD6600"></i>
-                 				<i class="fa fa-home fa-stack-1x" style="color: #ffffff"></i>
-               				</span>
-                			<span class="badge"> &nbsp;&nbsp;May 2016&nbsp;&nbsp; </span>
-            			</div>
-            			<div class="line-content-box">
-							<p>Built my personal blog site, JeraKrs.com.</p>
-            			</div>
-					</div>
-
-        			<div class="line-item">
-            			<div class="line-icon-warp ">
-              				<span class="fa-stack fa-lg">
-			     			   	<i class="fa fa-circle fa-stack-2x" style="color: #CD5C5C"></i>
-                  				<i class="fa fa-book fa-stack-1x" style="color: #ffffff"></i>
-               				</span>
-                			<span class="badge"> &nbsp;&nbsp;Apr 2016&nbsp;&nbsp; </span>
-            			</div>
-            			<div class="line-content-box">
-							<p>Finished undergraduates ' graduation project, 《Application of Automatic Publishing Platform Based on LXC》.</p>
-            			</div>
-					</div>
-
-        			<div class="breakline">------------------&nbsp;&nbsp;<span class="badge">&nbsp;&nbsp;2 0 1 5&nbsp;&nbsp;</span>&nbsp;&nbsp;------------------</div>
-
-        			<div class="line-item">
-            			<div class="line-icon-warp ">
-              				<span class="fa-stack fa-lg">
-								<i class="fa fa-circle fa-stack-2x" style="color: #CD3700"></i>
-							    <i class="fa fa-trophy fa-stack-1x  fa-1x " style="color: #ffffff"></i>
-               				</span>
-                			<span class="badge"> &nbsp;&nbsp;Nov 2015&nbsp;&nbsp; </span>
-            			</div>
-            			<div class="line-content-box">
-							<p>The ACM-ICPC Asia Regional Contest EC-final 2015, Silver Medal.</p>
-            			</div>
-					</div>
-
-        			<div class="line-item">
-            			<div class="line-icon-warp ">
-              				<span class="fa-stack fa-lg">
-								<i class="fa fa-circle fa-stack-2x" style="color: #CD3700"></i>
-							    <i class="fa fa-user fa-stack-1x  fa-1x " style="color: #ffffff"></i>
-               				</span>
-                			<span class="badge"> &nbsp;&nbsp;May 2015&nbsp;&nbsp; </span>
-            			</div>
-            			<div class="line-content-box">
-							<p>The 2014-2015 National Scholarship.</p>
-            			</div>
-					</div>
-
-
-        			<div class="breakline">------------------&nbsp;&nbsp;<span class="badge">&nbsp;&nbsp;2 0 1 4&nbsp;&nbsp;</span>&nbsp;&nbsp;------------------</div>
-
-        			<div class="line-item">
-            			<div class="line-icon-warp ">
-              				<span class="fa-stack fa-lg">
-								<i class="fa fa-circle fa-stack-2x" style="color: #CD3700"></i>
-							    <i class="fa fa-trophy fa-stack-1x  fa-1x " style="color: #ffffff"></i>
-               				</span>
-                			<span class="badge"> &nbsp;&nbsp;Nov 2014&nbsp;&nbsp; </span>
-            			</div>
-            			<div class="line-content-box">
-							<p>The 39th ACM-ICPC Asia Guangzhou and Shanghai Regional Contest, Bronze Medal.</p>
-            			</div>
-					</div>
-
-        			<div class="line-item">
-            			<div class="line-icon-warp ">
-              				<span class="fa-stack fa-lg">
-								<i class="fa fa-circle fa-stack-2x" style="color: #CD3700"></i>
-							    <i class="fa fa-user fa-stack-1x  fa-1x " style="color: #ffffff"></i>
-               				</span>
-                			<span class="badge"> &nbsp;&nbsp;Apr 2014&nbsp;&nbsp; </span>
-            			</div>
-            			<div class="line-content-box">
-							<p>Gained 'Fujian Provence Excellent League Member' title.</p>
-            			</div>
-					</div>
-
-
-        			<div class="breakline">------------------&nbsp;&nbsp;<span class="badge">&nbsp;&nbsp;2 0 1 3&nbsp;&nbsp;</span>&nbsp;&nbsp;------------------</div>
-
-        			<div class="line-item">
-            			<div class="line-icon-warp ">
-              				<span class="fa-stack fa-lg">
-								<i class="fa fa-circle fa-stack-2x" style="color: #CD3700"></i>
-							    <i class="fa fa-trophy fa-stack-1x  fa-1x " style="color: #ffffff"></i>
-               				</span>
-                			<span class="badge"> &nbsp;&nbsp;Dec 2013&nbsp;&nbsp; </span>
-            			</div>
-            			<div class="line-content-box">
-							<p>The 4th Fujian Provence Collegiate Programming Contest, Gold Medal.</p>
-            			</div>
-					</div>
-
-					<div class="line-item">
-            			<div class="line-icon-warp ">
-              				<span class="fa-stack fa-lg">
-								<i class="fa fa-circle fa-stack-2x" style="color: #CD3700"></i>
-							    <i class="fa fa-trophy fa-stack-1x  fa-1x " style="color: #ffffff"></i>
-               				</span>
-                			<span class="badge"> &nbsp;&nbsp;July 2013&nbsp;&nbsp; </span>
-            			</div>
-            			<div class="line-content-box">
-							<p>The 4th 'lanqiao' National Collegiate Programming Contest, the second award.</p>
-            			</div>
-					</div>
-
-					<div class="line-item">
-            			<div class="line-icon-warp ">
-              				<span class="fa-stack fa-lg">
-								<i class="fa fa-circle fa-stack-2x" style="color: #9932CC"></i>
-							    <i class="fa fa-users fa-stack-1x  fa-1x " style="color: #ffffff"></i>
-               				</span>
-                			<span class="badge"> &nbsp;&nbsp;Mar 2013&nbsp;&nbsp; </span>
-            			</div>
-            			<div class="line-content-box">
-							<p>Joined Laboratory 104, started to learn algorithm.</p>
-            			</div>
-					</div>
-
-
-        			<div class="breakline">------------------&nbsp;&nbsp;<span class="badge">&nbsp;&nbsp;2 0 1 2&nbsp;&nbsp;</span>&nbsp;&nbsp;------------------</div>
-
-        			<div class="line-item">
-            			<div class="line-icon-warp ">
-              				<span class="fa-stack fa-lg">
-								<i class="fa fa-circle fa-stack-2x" style="color: #31699d"></i>
-							    <i class="fa fa-university fa-stack-1x  fa-1x " style="color: #ffffff"></i>
-               				</span>
-                			<span class="badge"> &nbsp;&nbsp;Sep 2012&nbsp;&nbsp; </span>
-            			</div>
-            			<div class="line-content-box">
-							<p>Entered the Fujian Normal University.</p>
-            			</div>
-					</div>
-
-        			<div class="breakline">------------------&nbsp;&nbsp;<span class="badge">&nbsp;&nbsp;e a r l i e r &nbsp;&nbsp;</span>&nbsp;&nbsp;------------------</div>
-
-        			<div class="line-item">
-            			<div class="line-icon-warp ">
-              				<span class="fa-stack fa-lg">
-							    <i class="fa fa-circle fa-stack-2x" style="color: #FFC125"></i>
-							    <i class="fa fa-music fa-stack-1x" style="color: #ffffff"></i>
-               				</span>
-                			<span class="badge"> &nbsp;&nbsp;Mar 2010&nbsp;&nbsp; </span>
-            			</div>
-            			<div class="line-content-box">
-							<p>Started to play the guitar.</p>
-            			</div>
-					</div>
-
-        			<div class="line-item">
-            			<div class="line-icon-warp ">
-              				<span class="fa-stack fa-lg">
-							    <i class="fa fa-circle fa-stack-2x" style="color: #ff9357"></i>
-							    <i class="fa fa-child fa-stack-1x" style="color: #ffffff"></i>
-               				</span>
-                			<span class="badge"> &nbsp;&nbsp;July 1994&nbsp;&nbsp; </span>
-            			</div>
-            			<div class="line-content-box">
-							<p>I was bron.</p>
-            			</div>
-					</div>
 
         		</div>
 
@@ -320,3 +137,7 @@ layout: default
 		</div>
 	</div>
 </div>
+
+<script type="text/javascript">
+	$(window).load(load);
+</script>

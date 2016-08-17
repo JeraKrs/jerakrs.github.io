@@ -31,4 +31,3 @@ layout: home
 		</div>
 	</div>
 </div>
-
