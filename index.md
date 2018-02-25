@@ -2,12 +2,12 @@
 layout: home
 ---
 
-<div class="index-content study">
+<div class="index-content article">
 	<div class="section">
 		<ul class="artical-cate">
-			<li class="on"><a href="/"><span>Note</span></a></li>
-			<li style="text-align:center"><a href="/Pages/life"><span>Life</span></a></li>
-			<li style="text-align:right"><a href="/Pages/algorithm"><span>Alg</span></a></li>
+			<li class="on" style="text-align:left"><a href="/"><span>博客</span></a></li>
+			<li style="text-align:center"><a href="/Pages/project"><span>项目</span></a></li>
+			<li style="text-align:right"><a href="/Pages/habit"><span>兴趣</span></a></li>
 		</ul>
 
 		<div class="cate-bar"><span id="cateBar"></span></div>

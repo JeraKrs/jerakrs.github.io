@@ -3,7 +3,6 @@ layout: default
 ---
 <link rel="stylesheet" href="/css/font-awesome/css/font-awesome.min.css">
 <link rel="stylesheet" href="/css/timeline.css">
-<script src="/js/about.js" type="text/javascript"></script>
 
 <div class="index-content about">
 
@@ -17,7 +16,7 @@ layout: default
 			</div>
 			<div class="info-body">
 				<p class="info-content">
-				Hi, I am JeraKrs, a senior student in Fujian Normal University. And I will graduate soon, maybe I will study in the University of Bristol after few months.
+				Hi, I am JeraKrs, a retired ACMer and eagerness to finger-style.
 				</p>
 			</div>
 		</div>
@@ -35,12 +34,12 @@ layout: default
 				</p>
 				<p class="info-content">
 					<i class="fa fa-envelope"></i>
-					<strong>&nbsp&nbspJerakrs@qq.com</strong>
+					<strong>&nbsp&nbspJerakrs@gmail.com</strong>
 				</p>
 			</div>
 		</div>
 
-		<!-- Social Link -->
+		<!-- Social Link
 		<div class="info-page">
 			<div class="info-title">
 				<i class="fa fa-info-circle"></i>
@@ -106,6 +105,7 @@ layout: default
 
 			</div>
 		</div>
+		-->
 
 		<!-- Timeline -->
 		<div class="info-page">
@@ -122,6 +122,34 @@ layout: default
             			<span class="badge"><span class="fa fa-clock-o"></span>My Timeline</span>
         			</div>
 
+				{% for items in site.data.timeline %}
+
+					<div class="breakline">
+						------------------
+						<span class="badge">&nbsp;&nbsp;{{ items.title }}&nbsp;&nbsp</span>
+						------------------
+					</div>
+
+					{% for item in items.events %}
+
+					<div class="line-item">
+						<div class="line-icon-warp">
+
+						<span class="fa-stack fa-lg">
+							<i class="fa fa-circle fa-stack-2x" style="color: {{ item.color }}"></i>
+							<i class="fa {{ item.type }} fa-stack-1x" style="color: #ffffff"></i>
+						</span>
+						<span class="badge"> &nbsp;&nbsp;{{ item.badge }}&nbsp;&nbsp; </span>
+
+						</div>
+
+						<div class="line-content-box"><p>{{ item.desc }}</p></div>
+					</div>
+
+					{% endfor %}
+
+				{% endfor %}
+
         		</div>
 
 			</div>
@@ -137,7 +165,3 @@ layout: default
 		</div>
 	</div>
 </div>
-
-<script type="text/javascript">
-	$(window).load(load);
-</script>
