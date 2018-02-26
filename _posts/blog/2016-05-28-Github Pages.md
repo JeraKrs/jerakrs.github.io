@@ -2,7 +2,7 @@
 layout: post
 title: 使用Github Pages搭建个人博客
 description: Github作为一个代码社区，管理着许多项目代码，为了使项目能够清晰直观地呈现给别人，介绍文档是不可或缺的，甚至有时需要一个完整的文档站。而Github Pages就是提供给用户用于介绍托管在Github上的项目，并且使用它可以很方便的建立自己的独立博客，并且免费。
-category: note
+category: blog
 ---
 
 开始写博客已经有三年了，一开始写博客是因为学习算法，在各种不同的OJ上刷题，然后写题解。后来觉得社区提供的版面样式太单一了，所以萌生了自己搭建博客站点的想法，而且有自己独立的域名也是挺酷的一件事。最近几天跟着网上的教程自己动手搭了博客，所以写篇文章分享下经验。
@@ -69,7 +69,7 @@ RubyGems 是一个 Ruby 包的管理工具，就像 Homebrew，npm 等，可以�
 	##同样在安装完成后输出版本号检查结果
 	$ jekyll -v
 
-至此，你已经成功在本地电脑上安装好了 Jekyll。如果你使用Markdown的话，需要安装Markdown的解释器，并且在你的_config.yml里面设置`markdown:rdiscount`
+至此，你已经成功在本地电脑上安装好了 Jekyll。如果你使用Markdown的话，需要安装Markdown的解释器，并且在你的\_config.yml里面设置`markdown:rdiscount`
 
 	$ gem install jekyll rdiscount
 
@@ -86,26 +86,26 @@ RubyGems 是一个 Ruby 包的管理工具，就像 Homebrew，npm 等，可以�
 Jekyll 其实就是一个文本的转换引擎，使用[Liquid](https://github.com/shopify/liquid/wiki/liquid-for-designers)板语言，支持一些标记语言，通过layout将文档拼装在一起展示。Jekyll 有着严格的结构定义：
 
 ```
-　　/jekyll_demo
-　　　　|--　_config.yml
-　　　　|--  _includes
-　　　　|--　_layouts
-　　　　|　　　|--　default.html 
-　　　　|--　_posts
-　　　　|　　　|--　2016-05-27-hello-world.html
-　　　　|-- _site
-　　　　|--  index.html
+/jekyll_demo
+　　|--　_config.yml
+　　|--  _includes
+　　|--　_layouts
+　　|　　　|--　default.html 
+　　|--　_posts
+　　|　　　|--　2016-05-27-hello-world.html
+　　|-- _site
+　　|--  index.html
 ```
 
-#### _config.yml
+#### \_config.yml
 
 Jekyll 的配置文件，具体解释参见[官方文档](http://jekyllrb.com/docs/configuration/)。
 
-#### _includes
+#### \_includes
 
 用来存放一些小的可复用的模块，通过`{ % include file.ext %}`（‘{’后的空格不加，下面同理）活调用。这条命令会调用**_includes/file.ext**文件。
 
-#### _layouts
+#### \_layouts
 
 这是模板文件存放的位置。使用模板需要通过YAML front matter来定义，`{ { content }}`标记可以将数据插入到这些模板中来。
 
@@ -116,14 +116,14 @@ Jekyll 的配置文件，具体解释参见[官方文档](http://jekyllrb.com/do
 每篇文章的头部，可以通过一个yaml文件头，来设置一些元数据。它用三根短划线"---"，标记开始和结束，里面每一行设置一种元数据。`layout: default`，表示该文章的模板使用**_layouts**目录下的**default.html**文件；`title: Hello World`，表示该文章的标题是"Hello World"，如果不设置这个值，默认使用嵌入文件名的标题，即"hello world"。而文章的分类索引也是通过元数据设定的，`category: study`。
 
 ```
-	---
-	layout: default
-	title: Hello World
-	category: study
-	---
+---
+layout: default
+title: Hello World
+category: study
+---
 ```
 
-#### _site
+#### \_site
 
 这个是 Jekyll 运行后生成的最终的文档，不用去关心。
 

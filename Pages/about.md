@@ -30,11 +30,11 @@ layout: default
 			<div class="info-body">
 				<p class="info-content">
 					<i class="fa fa-qq"></i>
-					<strong>&nbsp&nbsp1040784362</strong>
+					<strong>&nbsp;&nbsp;1040784362</strong>
 				</p>
 				<p class="info-content">
 					<i class="fa fa-envelope"></i>
-					<strong>&nbsp&nbspJerakrs@gmail.com</strong>
+					<strong>&nbsp;&nbsp;Jerakrs@gmail.com</strong>
 				</p>
 			</div>
 		</div>
@@ -126,7 +126,7 @@ layout: default
 
 					<div class="breakline">
 						------------------
-						<span class="badge">&nbsp;&nbsp;{{ items.title }}&nbsp;&nbsp</span>
+						<span class="badge">&nbsp;&nbsp;{{ items.title }}&nbsp;&nbsp;</span>
 						------------------
 					</div>
 

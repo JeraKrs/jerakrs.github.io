@@ -13,7 +13,7 @@ layout: home
 		<div class="cate-bar"><span id="cateBar"></span></div>
 		
 		<ul class="artical-list">
-			{% for post in site.categories.note %}
+			{% for post in site.categories.blog %}
 			<li>
 			<h2><a href="{{ post.url }}">{{ post.title }}
 			<dd style="font-size:10px; float:right">{{ post.date | date_to_string }}</dd>

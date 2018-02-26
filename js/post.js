@@ -43,7 +43,7 @@ $(document).ready(function() {
         }
 
         function addIndex() {
-            var menu = '<div id="menuIndex" class="sidemenu" style="top: 250px;"></div>';
+            var menu = '<div id="menuIndex" class="sidemenu" style="top: 100px;"></div>';
 
             $('#content').append(menu);
             $('#menuIndex').css('max-height',$(window).height()-350);
