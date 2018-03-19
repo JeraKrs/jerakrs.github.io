@@ -1,4 +1,4 @@
----
+--
 layout: home
 ---
 
@@ -6,8 +6,8 @@ layout: home
 	<div class="section">
 		<ul class="artical-cate">
 		    <li style="text-align:left"><a href="/"><span>博客</span></a></li>
-            <li class="on" style="text-align:center"><a href="/Pages/project"><span>项目</span></a></li>
-            <li style="text-align:right"><a href="/Pages/habit"><span>兴趣</span></a></li>
+            <li class="on" style="text-align:center"><a href="/pages/project"><span>项目</span></a></li>
+            <li style="text-align:right"><a href="/pages/habit"><span>兴趣</span></a></li>
 		</ul>
 
 		<div class="cate-bar"><span id="cateBar"></span></div>
@@ -29,7 +29,7 @@ layout: home
 	<div class="aside">
 		<div id="footer">
 			© copyright 2016 by 
-			<a href="/Pages/about" style="color:#d0604d">JeraKrs</a>
+			<a href="/pages/about" style="color:#d0604d">JeraKrs</a>
 		</div>
 	</div>
 </div>

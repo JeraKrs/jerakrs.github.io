@@ -161,7 +161,7 @@ layout: default
 	<div class="aside">
 		<div id="footer">
 			© copyright 2016 by 
-			<a href="/Pages/about" style="color:#d0604d">JeraKrs</a>
+			<a href="/pages/about" style="color:#d0604d">JeraKrs</a>
 		</div>
 	</div>
 </div>
