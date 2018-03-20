@@ -3,12 +3,12 @@
   desc: 整理收纳一些计算机相关知识的学习笔记，笔记编写工具有jupyter notebook，gitbook，sharelatex。
   source: Github
 
-- title: 算法总结
+- title: 数据结构与算法总结
   url: https://github.com/JeraKrs/ACM/blob/master/README.md
   desc: 准备中...
   source: Github
 
-- title: 算法题解
+- title: 竞赛算法题解
   url: http://blog.csdn.net/keshuai19940722
   desc: 题解博客，主要以 Uva、Hdu 和 Codeforces 的题目为主，题解几乎含括本人自接触算法竞赛至今所有做过的题目。
   source: CSDN
