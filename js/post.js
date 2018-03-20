@@ -46,7 +46,7 @@ $(document).ready(function() {
             var menu = '<div id="menuIndex" class="sidemenu" style="top: 100px;"></div>';
 
             $('#content').append(menu);
-            $('#menuIndex').css('max-height',$(window).height()-350);
+            $('#menuIndex').css('max-height',$(window).height()-200);
 
             var tmpl = genTmpl();
 			$('#menuIndex')
@@ -170,7 +170,7 @@ $(document).ready(function() {
 		});
 
 		$(window).resize(function(){
-			$('#menuIndex').css('max-height',$(window).height()-350);
+			$('#menuIndex').css('max-height',$(window).height()-200);
 		});
 	})
 
