@@ -163,7 +163,7 @@ GitHub Pages分两种，一种是你的GitHub用户名建立的`username.github.
 
 Disqus 使用起来很方便，注册用户后，点击`Admin`：
 
-![Alt text](/images/blogs/2016-05-28-01.png)
+![Alt text](https://farm1.staticflickr.com/822/40914526522_20e8026163_z.jpg)
 
 选择`Installing Disqus`，会跳转至选择平台的页面，选择`Universal Code`，Disqus会根据你的账户生成一段代码，复制到你的源码中。
 
