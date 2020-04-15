@@ -1,9 +1,25 @@
-- title: '2 0 1 8'
+- title: '2 0 2 0'
   events:
       - color: '#FFC125'
         type: 'fa-lightbulb-o'
         badge: 'Just Now'
         desc: 'Nothing to say~'
+
+
+- title: '2 0 1 8'
+  events:
+      - color: '#9932CC'
+        type: 'fa-users'
+        badge: 'Dec 2018'
+        desc: 'Work in Baidu China Co.'
+      - color: '#31699d'
+        type: 'fa-graduation-cap'
+        badge: 'Nov 2018'
+        desc: 'Graduate from University of Bristol.'
+      - color: '#228b22'
+        type: 'fa-plane'
+        badge: 'Sep 2018'
+        desc: 'Come back to China.'
 
 
 - title: '2 0 1 7'
