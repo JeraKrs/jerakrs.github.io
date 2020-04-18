@@ -1,0 +1,62 @@
+---
+layout: home
+---
+
+<link rel="stylesheet" href="/css/font-awesome/css/font-awesome.min.css">
+
+<div class="index-content article">
+	<div class="section">
+		<ul class="artical-cate">
+			<li class="on" style="text-align:left"><a href="/"><span>博客</span></a></li>
+			<li style="text-align:center"><a href="/pages/index"><span>索引</span></a></li>
+			<li style="text-align:right"><a href="/pages/about"><span>关于我</span></a></li>
+		</ul>
+
+		<div class="cate-bar"><span id="cateBar"></span></div>
+		
+		<ul class="artical-list">
+			{% for post in paginator.posts %}
+			<li>
+			<h2><a href="{{ post.url }}">{{ post.title }}
+			<dd style="font-size:10px; float:right">{{ post.date | date_to_string }}</dd>
+			</a></h2>
+			<div class="title-desc">{{ post.description }}</div>
+			</li>
+			{% endfor %}
+		</ul>
+
+		
+		<!-- Pagination links -->
+		<div>
+		{% if paginator.previous_page %}
+			<div float:left>
+				<span class="fa-stack fa-lg" style="float:left">
+					<a href="{{ paginator.previous_page_path }}">
+						<i class="fa fa-circle fa-stack-2x" style="color: #ffffff"></i>
+						<i class="fa fa-arrow-left fa-stack-1x" style="color: #d0d0d0"></i>
+					</a>
+				</span>
+			</div>
+		{% endif %}
+
+		{% if paginator.next_page %}
+			<div style="float:right">
+				<span class="fa-stack fa-lg">
+					<a href="{{ paginator.next_page_path }}">
+						<i class="fa fa-circle fa-stack-2x" style="color: #ffffff"></i>
+						<i class="fa fa-arrow-right fa-stack-1x" style="color: #d0d0d0"></i>
+					</a>
+				</span>
+			</div>
+		{% endif %}
+		</div>
+
+	</div>
+
+	<div class="aside">
+		<div id="footer">
+			© copyright 2020 by 
+			<a href="/pages/timeline" style="color:#d0604d">JeraKrs</a>
+		</div>
+	</div>
+</div>

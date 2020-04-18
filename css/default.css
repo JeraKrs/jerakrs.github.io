@@ -24,11 +24,11 @@ ol, ul { list-style:none; }
 
 /**********		Home Index Section		**********/
 .index-content .aside { position:fixed; top:0px; left:0px; width: 40%; height: 100%; min-width:300px; max-width:500px; background:#000; box-shadow:inset -1px 0 0 rgba(0,0,0,0.3); background-size:cover; opacity: 0.8; }
-.article, .proj, .habit { margin:0px; width:100%; min-width:600px; max-width:1560px; }
+.article, .index, .about { margin:0px; width:100%; min-width:600px; max-width:1560px; }
 .article .aside{ background-image:url('/images/background_blog.jpeg'); }
-.proj .aside{ background-image:url('/images/background_project.jpeg');}
-.habit .aside{ background-image:url('/images/background_habit.jpg');}
+.index .aside{ background-image:url('/images/background_index.jpeg');}
 .about .aside{ background-image:url('/images/background_about.jpg');}
+.timeline .aside{ background-image:url('/images/background_timeline.jpg');}
 
 .index-content .section { margin-left:40%; width:40%; padding-top:80px; padding-left:10%; padding-right:10%; }
 .index-content .artical-list { width:100%; margin:0 auto; }
@@ -138,7 +138,7 @@ pre ol { margin-left:25px; list-style-type:decimal; }
 	.home-menu { position:absolute; }
 
 	/* Blog Index Page */
-	.article, .proj, .habit { width:100%; min-width:0px; }
+	.article, .index, .about { width:100%; min-width:0px; }
 	.aside { width:0%; min-width:0px; display:none; background:none; }
 	.index-content .section { margin-left:0px; width:80%; padding-top:80px; padding-left:5%; padding-right:5%; }
 	.index-content .section { margin-left:0; padding-right:0; }

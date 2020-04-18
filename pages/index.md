@@ -2,12 +2,12 @@
 layout: home
 ---
 
-<div class="index-content proj">
+<div class="index-content index">
 	<div class="section">
 		<ul class="artical-cate">
 		    <li style="text-align:left"><a href="/"><span>博客</span></a></li>
-            <li class="on" style="text-align:center"><a href="/pages/project"><span>项目</span></a></li>
-            <li style="text-align:right"><a href="/pages/habit"><span>兴趣</span></a></li>
+            <li class="on" style="text-align:center"><a href="/pages/index"><span>索引</span></a></li>
+            <li style="text-align:right"><a href="/pages/about"><span>关于我</span></a></li>
 		</ul>
 
 		<div class="cate-bar"><span id="cateBar"></span></div>
@@ -28,8 +28,8 @@ layout: home
 
 	<div class="aside">
 		<div id="footer">
-			© copyright 2016 by 
-			<a href="/pages/about" style="color:#d0604d">JeraKrs</a>
+			© copyright 2020 by 
+			<a href="/pages/timeline" style="color:#d0604d">JeraKrs</a>
 		</div>
 	</div>
 </div>

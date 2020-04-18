@@ -1,6 +1,9 @@
 auto: true
 
-markdown: rdiscount
+markdown: kramdown
 
 title: JeraKrs.com
-url: https://jerakrs.com
+url: https://jerakrs.github.io/
+
+plugins: [jekyll-paginate]
+paginate: 10
