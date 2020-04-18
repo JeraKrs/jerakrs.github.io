@@ -25,7 +25,7 @@ layout: home
 			</div>
 			<div class="info-body">
 				<p class="info-content">
-				Hi，我是 Jerakrs，一只后台研发程序猿，现居上海；打过 ACM、留过学、热爱吉他指弹。
+				Hi，我是 Jerakrs，一只后台研发程序猿，现居上海；玩过 ACM 竞赛、去英国留过学、热爱吉他指弹。
 				</p>
 			</div>
 		</div>
