@@ -1,9 +1,10 @@
 Jerakrs's Personal Website
 ============================
 
-
-Project
+简介
 ----------------
 
-The Blog of Solution on Algorithm
-The Notes on Computer Science
+个人博客~
+
+1、个人主页：https://jerakrs.github.io/
+2、关于我：https://jerakrs.github.io/pages/about

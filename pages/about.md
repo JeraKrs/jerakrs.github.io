@@ -25,7 +25,7 @@ layout: home
 			</div>
 			<div class="info-body">
 				<p class="info-content">
-				Hi，我是 Jerakrs，一只后台研发程序猿，现居上海；玩过 ACM 竞赛、去英国留过学、热爱吉他指弹。
+				Hi，我是 Jerakrs，一只后端研发程序猿，现居上海；参加过 ACM 竞赛、去英国留过学、热爱吉他指弹。
 				</p>
 			</div>
 		</div>
@@ -37,7 +37,7 @@ layout: home
 				<strong> Work Experience</strong>
 			</div>
 			<div class="info-body">
-				<li> 2018.12 ~ Now ：百度商业架构部担任后端研发工程师，负责凤巢在线系统AS模块的开发。</li>
+				<li> 2018.12 ~ Now ：百度商业架构部担任后端工程师，负责凤巢在线系统AS模块的研发。</li>
 				<li> 2016.07 ~ 2017.06 ： 谱思科技担任后端研发工程师，负责后端服务开发。</li>
 			</div>
 		</div>
