@@ -32,7 +32,7 @@ ol, ul { list-style:none; }
 
 .index-content .section { margin-left:40%; width:40%; padding-top:80px; padding-left:10%; padding-right:10%; }
 .index-content .artical-list { width:100%; margin:0 auto; }
-.index-content .artical-list li { margin-bottom:70px; }
+.index-content .artical-list li { margin-bottom:50px; }
 .index-content h2 { font-size:20px; margin-bottom:15px; word-break: break-all;}
 .index-content h2 a { color:#444 }
 .index-content h2 a:hover { color:#E50053; text-decoration:none; }
