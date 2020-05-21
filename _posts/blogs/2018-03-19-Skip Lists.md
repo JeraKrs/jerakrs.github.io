@@ -34,23 +34,29 @@ category: algorithm
 
 ### 数据结构定义
 
-首先，跳跃链表是由结点组成的，但跳跃链表的结点可以有多个正向指针。一个等级为n的结点，会有n个正向指针。结点不需要储存等级，跳跃链表中的多条链表隐含了结点的等级。
+首先，跳跃链表是由结点组成的，但跳跃链表的结点可以有多个正向指针。一个等级为 n 的结点，会有 n 个正向指针。结点不需要储存等级，跳跃链表中的多条链表隐含了结点的等级。
 
-```
-struct node {
-    char key[MAXN];
-    char val[MAXN];
-    struct node* forwards[MAXL];
+```c++
+template <typename Key, typename Value>
+class SkiplistItem {
+private:
+	Key _key;
+	Value _val;
+	SkiplistItem** _forwards;
 };
 ```
 
 有了结点，接下来就是链表结构，其中需要储存结点个数、当前跳跃表内最大的层数和指向头结点的指针。
 
-```
-struct skiplist {
-    int nItems;
-    int level;
-    struct node* header;
+```c++
+template <typename Key, typename Value>
+class Skiplist {
+private:
+	uint32_t  _size;
+	uint32_t _level;
+	double _lvl_prob;
+
+	SkiplistItem<Key, Value>* _header;
 };
 ```
 
@@ -58,20 +64,20 @@ struct skiplist {
 
 使用跳跃链表之前，需要对其进行初始化，初始化需要申请头结点，头结点无意义，它的所有正向指针均为NULL。此时的结点个数和跳跃表内最大的层数为零。
 
-```
-struct skiplist* initSkiplist() {
-	struct skiplist* items = (struct skiplist*)malloc(sizeof(struct skiplist));
+```c++
+Skiplist(double lvl_prob = SKIPLIST_LEVEL_PROB,
+			uint32_t max_level = SKIPLIST_MAX_LEVEL,
+			uint32_t max_size = SKIPLIST_MAX_SIZE) :
+		_size(0), _max_size(max_size),
+		_level(0), _max_level(max_level),
+		_lvl_prob(lvl_prob) {
+		
+	_header = new (std::nothrow) SkiplistItem<Key, Value>(_max_level);
 
-	if (items == NULL) {
-		fprintf(stderr, "**ERROR**: initSkiplist() fail to"
-				" initialise the skip list.\n");
-		exit(1);
+	if (!_header) {
+		fprintf(stderr, "Skiplist: failed to apply memory space for Skiplist.\n");
+		throw std::bad_alloc();
 	}
-
-	items->nItems = 0;
-	items->level = 0;
-	items->header = newNode();
-	return items;
 }
 ```
 
@@ -83,29 +89,26 @@ struct skiplist* initSkiplist() {
 
 其中红色链路为查找的过程。
 
-```
-int searchSkiplist(struct skiplist* items, const char* key, char* ret) {
-	if (items == NULL) return -1;
-	if (key == NULL || strlen(key) >= MAXN) return -1;
-    if (ret == NULL) return -1;
-
-	struct node* x = items->header;
-	for (int i = items->level - 1; i >= 0; i--) {
-		while (x->forwards[i] != NULL &&
-				strcmp(x->forwards[i]->key, key) < 0) {
-			x = x->forwards[i];
+```c++
+template <typename Key, typename Value>
+bool Skiplist<Key, Value>::search(const Key& key, Value* res) {
+	SkiplistItem<Key, Value>* x = _header;
+	for (int i = _level - 1; i >= 0; --i) {
+		while (x->_forwards[i]
+				&& x->_forwards[i]->_key < key) {
+			x = x->_forwards[i];
 		}
 	}
 
-	if (x->forwards[0] != NULL) {
-		x = x->forwards[0];
-		if (strcmp(x->key, key) == 0) {
-			strcpy(ret, x->val);
-			return 0;
+	if (x->_forwards[0]) {
+		x = x->_forwards[0];
+		if (!(x->_key < key) && !(key < x->_key)) {
+			*res = x->_val;
+			return true;
 		}
 	}
 
-	return 1;
+	return false;
 }
 ```
 
@@ -118,52 +121,56 @@ int searchSkiplist(struct skiplist* items, const char* key, char* ret) {
 新节点的等级为2，所以我们需要修改updates[0]和updates[1]指向的结点的正向指针，如*图-e*。
 
 
-```
-int insertSkiplist(struct skiplist* items, const char* key, const char* val) {
-	if (items == NULL) return -1;
-	if (key == NULL || strlen(key) >= MAXN) return -1;
-    if (val == NULL || strlen(val) >= MAXN) return -1;
-	if (items->nItems == MAXITEMS - 1) return -1;
+```c++
+template <typename Key, typename Value>
+bool Skiplist<Key, Value>::insert(const Key& key, const Value& val) {
+	if (_size >= _max_size) {
+		return false;
+	}
 
-	struct node* updates[MAXL];
-	struct node* x = items->header;
+	SkiplistItem<Key, Value>* updates[_max_level];
+	SkiplistItem<Key, Value>* x = _header;
 
-	for (int i = items->level - 1; i >= 0; i--) {
-		while (x->forwards[i] != NULL &&
-				strcmp(x->forwards[i]->key, key) < 0) {
-			x = x->forwards[i];
+	for (int i = _level - 1; i >= 0; --i) {
+		while (x->_forwards[i] && x->_forwards[i]->_key < key) {
+			x = x->_forwards[i];
 		}
 		updates[i] = x;
 	}
 
-	if (x->forwards[0] != NULL) {
-		x = x->forwards[0];
-		/* Key is exists */
-		if (strcmp(x->key, key) == 0) {
-			return -1;
+	if (x->_forwards[0]) {
+		x = x->_forwards[0];
+		// key is existing.
+		if (!(x->_key < key) && !(key < x->_key)) {
+			return false;
 		}
 	}
 
-	int lvl = randomLevel();
-
-	if (lvl > items->level) {
-		for (int i = items->level; i < lvl; i++)
-			updates[i] = items->header;
-		items->level = lvl;
+	uint32_t level = random_level();
+	if (level > _level) {
+		for (uint32_t i = _level; i < level; ++i) {
+			updates[i] = _header;
+		}
+		_level = level;
 	}
 
-	struct node* y = newNode();
-	strcpy(y->key, key);
-	strcpy(y->val, val);
+	SkiplistItem<Key, Value>* y = new (std::nothrow) SkiplistItem<Key, Value>(_max_level);
+	if (y) {
+		y->_key = key;
+		y->_val = val;
+	} else {
+		fprintf(stderr, "Skiplist: failed to apply for memory space.\n");
+		return false;
+	}
 
-	for (int i = 0; i < items->level; i++) {
+	for (uint32_t i = 0; i < _level; ++i) {
 		x = updates[i];
-		y->forwards[i] = x->forwards[i];
-		x->forwards[i] = y;
+		y->_forwards[i] = x->_forwards[i];
+		x->_forwards[i] = y;
 	}
 
-	items->nItems++;
-	return 0;
+	++_size;
+	return true;
 }
 ```
 
@@ -171,39 +178,42 @@ int insertSkiplist(struct skiplist* items, const char* key, const char* val) {
 
 删除算法与插入算法类似，找到对应Key值的结点后，释放结点，并借助updates数组更新链表。
 
-```
-int deleteSkiplist(struct skiplist* items, const char* key) {
-	if (items == NULL) return -1;
-	if (key == NULL || strlen(key) >= MAXN)	return -1;
+```c++
+template <typename Key, typename Value>
+bool Skiplist<Key, Value>::remove(const Key& key) {
+	SkiplistItem<Key, Value>* updates[_max_level];
 
-	struct node* updates[MAXL];
-
-	struct node* x = items->header;
-	for (int i = items->level - 1; i >= 0; i--) {
-		while (x->forwards[i] != NULL &&
-				strcmp(x->forwards[i]->key, key) < 0) {
-			x = x->forwards[i];
+	SkiplistItem<Key, Value>* x = _header;
+	for (int i = _level - 1; i >= 0; --i) {
+		while (x->_forwards[i] &&
+				x->_forwards[i]->_key < key) {
+			x = x->_forwards[i];
 		}
 		updates[i] = x;
 	}
 
-	if (x->forwards[0] != NULL) {
-		x = x->forwards[0];
-		if (strcmp(x->key, key) == 0) {
-			for (int i = 0; i < items->level; i++) {
-				if (updates[i]->forwards[i] != x) break;
-				updates[i]->forwards[i] = x->forwards[i];
+	if (x->_forwards[0]) {
+		x = x->_forwards[0];
+
+		if (!(x->_key < key) && !(key < x->_key)) {
+			for (uint32_t i = 0; i < _level; ++i) {
+				if (updates[i]->_forwards[i] != x) {
+					break;
+				}
+				updates[i]->_forwards[i] = x->_forwards[i];
 			}
-			free(x);
-			items->nItems--;
+			delete x;
+			_size--;
+
 			/* Update maximum level */
-			while (items->level && items->header->forwards[items->level-1] == NULL) {
-				items->level--;
+			while (_level && !_header->_forwards[_level-1]) {
+				--_level;
 			}
-			return 0;
+
+			return true;
 		}
 	}
-	return -1;
+	return false;
 }
 ```
 
@@ -211,13 +221,15 @@ int deleteSkiplist(struct skiplist* items, const char* key) {
 
 这里的随机数生成器会随机生成1~MaxLevel之间的一个数，但每个数不是等概率的。假如现在有概率PROB（$0 < PROB < 1$），我们希望有 $\frac{1}{PROB}$ 结点的等级是大于1的，有 $\frac{1}{PROB^{2}}$ 结点的等级是大于2的，以此类推，当然最大等级是有限制的。
 
-```
-int randomLevel() {
-	int v = 1;
-	while (v < MAXL && (double)rand() / RAND_MAX < PROB) {
-		v++;
+```c++
+template <typename Key, typename Value>
+uint32_t Skiplist<Key, Value>::random_level() {
+	uint32_t lvl = 1;
+	while (lvl < _max_level
+			&& (double)rand() / RAND_MAX < _lvl_prob) {
+		++lvl;
 	}
-	return v;
+	return lvl;
 }
 ```
 
@@ -256,4 +268,3 @@ $$ = \frac{1}{1-PROB} $$ <br>
 ## 结语
 
 跳跃链表最早由 William Pugh 在 1990 提出，建议大家阅读一下《Skip Lists: A Probabilistic Alternative to Balanced Trees》这篇论文。跳跃链表在查找和插入等操作的性能上不逊色于平衡树，并且在实现上比平衡树简单许多。
-
