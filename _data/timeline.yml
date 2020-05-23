@@ -4,6 +4,10 @@
         type: 'fa-lightbulb-o'
         badge: 'Just Now'
         desc: 'Nothing to say~'
+      - color: '#CD6600'
+        type: 'fa-address-card-o'
+        badge: 'May 2020'
+        desc: 'Get drivers license.'
 
 
 - title: '2 0 1 8'
@@ -20,6 +24,14 @@
         type: 'fa-plane'
         badge: 'Sep 2018'
         desc: 'Come back to China.'
+      - color: '#228b22'
+        type: 'fa-plane'
+        badge: 'Apr 2018'
+        desc: 'Travel to Santorini, Greece.'
+      - color: '#228b22'
+        type: 'fa-train'
+        badge: 'Mar 2018'
+        desc: 'Travel to Paris, France.'
 
 
 - title: '2 0 1 7'
@@ -31,7 +43,7 @@
       - color: '#228b22'
         type: 'fa-plane'
         badge: 'Jun 2017'
-        desc: 'Arrive in United Kingdom.'
+        desc: 'Arrive in Bristol, United Kingdom.'
 
 
 - title: '2 0 1 6'
