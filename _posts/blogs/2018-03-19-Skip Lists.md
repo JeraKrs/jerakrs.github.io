@@ -30,7 +30,7 @@ category: algorithm
 
 ## Skip Lists 的实现
 
-跳跃链表的实现主要有基本数据结构的定义，链表初始化，查找、插入和删除操作，以及随机数生成器和释放链表。 接下来我们以 C 语言实现一个跳跃链表，方便大家理解，完整代码见 https://github.com/JeraKrs/acm/blob/master/algorithm/data_structure/linear-list/skiplist.hpp。
+跳跃链表的实现主要有基本数据结构的定义，链表初始化，查找、插入和删除操作，以及随机数生成器和释放链表。 接下来我们以 C 语言实现一个跳跃链表，方便大家理解，完整代码见 [skiplist.hpp](https://github.com/JeraKrs/acm/blob/master/algorithm/data_structure/linear-list/skiplist.hpp)。
 
 ### 数据结构定义
 
