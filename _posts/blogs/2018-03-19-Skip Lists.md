@@ -25,7 +25,7 @@ category: algorithm
 
 这就是跳跃链表的查询原理，上述例子并没有体现出跳远链表的效率，因为结点的个数比较少，我们将在后面分析跳跃链表的性能问题。
 
-![Figure 01](https://farm5.staticflickr.com/4779/27085375228_93184b055f_z.jpg)
+![figure01](https://gitee.com/jerakrs/pic-lib/raw/master/blogs/20180319/01.jpg)
 
 
 ## Skip Lists 的实现
@@ -90,7 +90,7 @@ Skiplist(double lvl_prob = SKIPLIST_LEVEL_PROB,
 
 查找的过程中就是给定一个指定的 Key，查找这个 Key 是否出现在跳跃表中，如果出现，则返回其值，如果不存在，则返回不存在。跳跃链表的查询算法会从等级最高链表开始查找，直到没有下一个结点或下一个结点的 Key 值比当前查找的 Key 值大时，跳跃链表会移动到下一级链表上查找，以此类推，直到查找到匹配的Key值。以查询 $Key=13$ 为例，查询过程有 *图-c*。
 
-![Figure 02](https://farm1.staticflickr.com/819/27085394288_e3ac2c2d7a_z.jpg)
+![Figure 02](https://gitee.com/jerakrs/pic-lib/raw/master/blogs/20180319/02.jpg)
 
 其中红色链路为查找的过程，下面是查询算法的实现：
 
@@ -121,7 +121,7 @@ bool Skiplist<Key, Value>::search(const Key& key, Value* res) {
 
 插入算法先找到对应 Key 值所在位置，插入算法和查询算法大致相似，不同的是这里需要用一个 updates 数组存放查询路径上每个等级链表的最后一项，用于更新链表。再新增结点时，先为结点随机分配一个等级，随机数生成器会在后面的篇幅讲到。假设现在我们需要将一个 Key=10 的结点插入跳跃链表中，首先是找到新节点的位置，并更新 updates 数组，如*图-d*。
 
-![Figure 03](https://farm1.staticflickr.com/817/26084666217_32bd9e48ba_z.jpg)
+![Figure 03](https://gitee.com/jerakrs/pic-lib/raw/master/blogs/20180319/03.jpg)
 
 假如新节点的等级为 2，那么我们就需要修改 updates[0] 和 updates[1] 指向的结点的 \_forwards[0] 和 \_forwards[1]，令它们指向新增的结点，并且新增结点的正向指针值为原先 updates[0] 和 updates[1] 指向的结点的 \_forwards[0] 和 \_forwards[1]，如*图-e*，和链表的插入方法一致，不同的是需要同时更新多条链表，而更新多少条链表取决于新增结点的等级。
 
