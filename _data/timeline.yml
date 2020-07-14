@@ -6,6 +6,10 @@
         desc: 'Nothing to say~'
       - color: '#CD6600'
         type: 'fa-address-card-o'
+        badge: 'Jul 2020'
+        desc: 'Get registered permanent residence in Shanghai.'
+      - color: '#CD6600'
+        type: 'fa-address-card-o'
         badge: 'May 2020'
         desc: 'Get driving license.'
 
