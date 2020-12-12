@@ -23,7 +23,7 @@
       - color: '#31699d'
         type: 'fa-graduation-cap'
         badge: 'Nov 2018'
-        desc: 'Graduate from University of Bristol.'
+        desc: "Graduate from University of Bristol and obtain the master's degree."
       - color: '#228b22'
         type: 'fa-plane'
         badge: 'Sep 2018'
@@ -59,7 +59,7 @@
       - color: '#31699d'
         type: 'fa-graduation-cap'
         badge: 'Jun 2016'
-        desc: 'Graduate from Fujian Normal University.'
+        desc: "Graduate from Fujian Normal University and obtain the bachelor's degree."
       - color: '#CD6600'
         type: 'fa-home'
         badge: 'May 2016'
